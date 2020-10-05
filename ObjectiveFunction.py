@@ -73,10 +73,3 @@ class ObjectiveFunction:
 
         # Make it a numpy array because WE ARE GOING FAST.
         return np.array(H)
-
-
-f = lambda x : 3*x[0]*x[1]**3 + 2*x[1]**2
-F = ObjectiveFunction(f,2,1)
-x_null = [1,-1]
-
-print(F.Hessian(x_null))
