@@ -1,0 +1,27 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+ \Input{A function $f:\mathbb{R}^n \to \mathbb{R}$, steptol, gradtol, maxiter, $x_0$}
+ \Output{A global extremum $x_*$.}
+ initialization\;
+$\tau$ = steptol\;
+$\alpha = 10^{-4}$\;
+
+ \While{n < maxiter {\bf or} {\bf not} $StoppingCriteria()$}{
+  $g_n = \nabla f(x_n)$\;
+  Solve $-H_ns_n = g_n$ for $s_n$\;
+	$x_{n+1} = x_n + s_n$\;
+	$f_{n+1} = f(x_{n+1})$\;
+	
+  \If{$f_{n+1} > f_n + \alpha g_n^T s_n$}{
+   $x_{n+1}, f_{n+1}$, flag = BacktrackingLineSearch($x_n$, $s_n$, $g_n$, $f_{n+1}$, $f_{n}$)\;
+			\If{flag is TRUE}{		
+			$x_{n+1}$, $f_{n+1}$ = TrustRegionSubproblem($x_n$,$g_c$, $H_c$, $s_n$,$\delta$,$\tau$)\;
+		}}
+		
+	Apply BFGS Update to $H_n$\;
+	
+ }
+\caption{Main loop}
+\end{algorithm}

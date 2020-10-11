@@ -1,0 +1,36 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+ \Input{xc,xplus,fplus,Gc,itrlimit,steptol,gradtol,itrcount}
+ \Output{minimized flag.}
+ 
+
+% This function determines when and what stopping conditions have been met.
+% If a condition is met, the user is given a notification.
+
+% minimized - boolean variable that indicates if one of our stopping
+% criteria has been met.
+
+minimized = false\;
+scaledgrad = (abs(Gc).* abs(xplus))./abs(fplus)\;
+stepdist = abs(xplus-xc)./abs(xplus)\;
+
+
+
+\uIf{max(scaledgrad) <= gradtol}{
+   minimized = true\;
+   msgbox('The norm of the scaled gradient is within the desired tolerance.',msgtitle)\;
+}   
+\uElseIf{max(stepdist) <= steptol}{ 
+   minimized = true\;
+   msgbox('The distance between the last two steps was with the step tolerance. This is either a minimizer or we are stuck.'...
+      ,msgtitle)\;
+}   
+\uElseIf{itrcount >= itrlimit}{
+    minimized = true\;
+   msgbox('The maximum iteration limit has been attained. This may not be a good candidate for a minimizer.',...
+      msgtitle,'error')
+ }  
+
+\end{algorithm}

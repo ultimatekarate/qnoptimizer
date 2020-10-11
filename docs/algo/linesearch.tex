@@ -1,0 +1,42 @@
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+ \Input{$x_n$, $s_n$, $f_{+}$}
+ \Output{Some stuff.}
+ 
+ $\alpha = 10^{-4}$\;
+ $d = g_c^Ts_n$\;
+$\lambda=1$\;
+ $iter=0$\;
+ \While{iter < maxiter {\bf and} $f_{+}> f_c + \alpha\lambda d$}{
+  $x_+ = x_c + \lambda s_n$\;
+  $f_+ = f(x_+)$\;
+		
+  \eIf(\tcc*[f]{Quadratic interpolation}){$\lambda$ = 1}{
+   $\hat{\lambda} = \frac{-d}{2(f_+-f_c-d)}$\;
+	}(\tcc*[f]{cubic interpolation}){
+	Solve $\begin{bmatrix}
+\lambda^3 & \lambda^2 \\
+\lambda_{-}^3 & \lambda_{-}^2 
+\end{bmatrix}\begin{bmatrix}
+a_1 \\
+a_2 
+\end{bmatrix} = \begin{bmatrix}
+f_{+} -f_c-d\lambda  \\
+f_{-}  -f_c-d\lambda_{-} 
+\end{bmatrix}$\;
+
+  $\hat{\lambda} = \frac{-a_2+\sqrt{a_2^2 - 3a_1d}}{3a_1}$\;
+	}
+	
+  $\hat{\lambda}=\min(\max(\hat{\lambda},0.1\lambda),0.5\lambda)$\;
+	$\lambda_{-} = \lambda$\;
+  $\lambda = \hat{\lambda}$\;
+	
+	$f_{-} = f_{+}$\;
+	$iter=iter+1$\;
+ }
+\caption{Line Search}
+\end{algorithm}

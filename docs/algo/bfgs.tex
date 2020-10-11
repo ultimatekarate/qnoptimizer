@@ -1,0 +1,26 @@
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+ \Input{H,xc,xplus,gc,gplus,eta}
+ \Output{H, skipupdate}
+
+ s = $x_+-x_c$\;
+ y = $g_+ - g_c$\;
+ 
+ skipupdate = true\;
+
+ \If{$y^Ts \geq \sqrt{\epsilon}||s||\times||y||$}{
+      t = $Hs$\;
+   
+      % Check to see if we need to update.
+      \If{$|y-t| >= \sqrt{\eta}\max(||g_c||,||g_+||)$}{
+         % Yes! Update the Hessian.
+         skipupdate = false\;
+         
+         $H = H + \frac{yy^T}{y^Ts} - \frac{t*(s^TH)}{s^Tt}$\;
+         $H = \frac{H+H'}{2}$\;
+      }
+ }
+\end{algorithm}

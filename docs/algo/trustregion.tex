@@ -1,0 +1,21 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+ \Input{Things}
+ \Output{A usefule thing}
+% Compute components of dogleg curve
+$\alpha = g_c^Tg_c$\;
+$\beta = g_c^TH_cg_c$\;
+$\gamma = \frac{\alpha^2}{\beta|g_c^Ts_n|}$\;
+$\eta   = .2 + .8\gamma$\;
+
+% We compute the components of the dogleg curve once.    
+cauchystep  = $-\frac{\alpha}{\beta}g_c$\;
+cauchylen = norm(cauchystep)\;
+$\hat{n}  = \eta s_n$-cauchystep\;
+ \While{flags {\bf and} i < 50}{
+  do the things\;
+ }
+\caption{Trust region}
+\end{algorithm}
