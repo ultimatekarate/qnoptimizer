@@ -62,6 +62,8 @@ class ObjectiveFunction:
              for i in range(self.__input_dim)])
 
     def Hessian(self,x):
+        # TODO: This method has some issues with numerical stability.
+
         # Computes a first order central difference approximation 
         # of the Hessian.        
         g = lambda x,i : self.partial_derivative(x,i)
