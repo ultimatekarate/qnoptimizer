@@ -1,5 +1,8 @@
 import numpy as np
 
+# This file contains the definition for the ObjectiveFunction class. 
+# 
+
 def ValidDim(n):
     assert n > 0, 'Not greater than 0.'
     assert isinstance(n,int), 'Not an integer.'
@@ -55,10 +58,12 @@ class ObjectiveFunction:
         return self.__Function(x)
 
     def gradient(self,x):
-        return np.array([self.partial_derivative(x,i) for i in range(self.__input_dim)])
+        return np.array([self.partial_derivative(x,i)\
+             for i in range(self.__input_dim)])
 
     def Hessian(self,x):
-        # Computes a first order central difference approximation of the Hessian.        
+        # Computes a first order central difference approximation 
+        # of the Hessian.        
         g = lambda x,i : self.partial_derivative(x,i)
         eye = np.identity(self.__input_dim)
         h = self._step_size
@@ -67,7 +72,8 @@ class ObjectiveFunction:
 
         # Check out this sick list comprehension.
         H = [
-                [ (half_hess(i,j) + half_hess(j,i))/(4*h) for i in range (self.__input_dim)] 
+                [ (half_hess(i,j) + half_hess(j,i))/(4*h)\
+                     for i in range (self.__input_dim)] 
                 for j in range(self.__input_dim)
             ]
 
