@@ -2,6 +2,7 @@ class qnoptimizer:
     # This will be the main class of the package.
 
     model_hessian = None
+    current_iteration = 0
     
     # These things are needed to determine when to stop the iterative 
     # procedure.

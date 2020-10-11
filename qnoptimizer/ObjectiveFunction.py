@@ -11,7 +11,7 @@ def ValidDim(n):
 
 class ObjectiveFunction:
     # This seems like a small enough step size.
-    _step_size = 10**-4
+    _step_size = 10**-3
 
     def __init__(self,f,n,m):
         self.SetFunction(f)
@@ -57,7 +57,7 @@ class ObjectiveFunction:
     def Evaluate(self,x):
         return self.__Function(x)
 
-    def gradient(self,x):
+    def Gradient(self,x):
         return np.array([self.partial_derivative(x,i)\
              for i in range(self.__input_dim)])
 
